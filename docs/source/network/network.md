@@ -77,13 +77,9 @@ work both in channel C1 and C2. Organization R3 has a client application that
 can do this on channel C2. Peer node P1 maintains a copy of the ledger L1
 associated with C1. Peer node P2 maintains a copy of the ledger L1 associated
 with C1 and a copy of ledger L2 associated with C2. Peer node P3 maintains a
-copy of the ledger L2 associated with C2.
-
-The network is governed according to
+copy of the ledger L2 associated with C2.The network is governed according to
 policy rules specified in network configuration NC4, the network is under the
-control of organizations R1 and R4.
-
-Channel C1 is governed according to the
+control of organizations R1 and R4.Channel C1 is governed according to the
 policy rules specified in channel configuration CC1; the channel is under the
 control of organizations R1 and R2.  Channel C2 is governed according to the
 policy rules specified in channel configuration CC2; the channel is under the
@@ -93,14 +89,12 @@ The ordering service also supports application channels C1 and C2, for the
 purposes of transaction ordering into blocks for distribution. Each of the four
 organizations has a preferred Certificate Authority.*
 
-*R1、R2、R3和R4，四个组织共同决定创建并使用一个Hyperledger Fabric网络，并写入协议中。R4被指定为该网络的发起者——他被授权来创建该网络的初始版本。R4没有要在网络上进行商业交易的目的。R1和R2需要在整个网络中有私密通信，R2和R3也许要私密通信。R1有个客户端应用可以在Channel C1上发起交易。R2有客户端应用可以在Channel C1和C2上发起交易。 R3的客户端应用可以在C2上发起交易。对等节点P1维护一份Channel C1的账本L1的副本。对等节点P2维护一份Channel C1的账本L1的副本和一份Channel C2的账本L2的副本。对等节点P3维护一份Channel C的账本L2的副本。网络根据网络配置文件NC4来治理，网络在R1和R4的控制之下。Channel C1的治理是依据Channel配置CC1中规定的策略原则；并在R1和R2的控制下。 Channel C2的治理是依据Channel配置CC2中规定的策略原则，且在R2和R3的控制之下。排序服务O4作为网络N的网络管理点，并且使用系统Channel。排序服务同时也支持应用Channel C1和C2，目的是将交易排序打包到区块链中以待分发。每个组织都有自己的认证机构
-
-*
+*R1、R2、R3和R4，四个组织共同决定创建并使用一个Hyperledger Fabric网络，并写入协议中。R4被指定为该网络的发起者——他被授权来创建该网络的初始版本。R4没有要在网络上进行商业交易的目的。R1和R2需要在整个网络中有私密通信，R2和R3也许要私密通信。R1有个客户端应用可以在Channel C1上发起交易。R2有客户端应用可以在Channel C1和C2上发起交易。 R3的客户端应用可以在C2上发起交易。对等节点P1维护一份Channel C1的账本L1的副本。对等节点P2维护一份Channel C1的账本L1的副本和一份Channel C2的账本L2的副本。对等节点P3维护一份Channel C的账本L2的副本。网络根据网络配置文件NC4来治理，网络在R1和R4的控制之下。Channel C1的治理是依据Channel配置CC1中规定的策略原则；并在R1和R2的控制下。 Channel C2的治理是依据Channel配置CC2中规定的策略原则，且在R2和R3的控制之下。排序服务O4作为网络N的网络管理点，并且使用系统Channel。排序服务同时也支持应用Channel C1和C2，目的是将交易排序打包到区块链中以待分发。每个组织都有自己的认证机构*
 
 ## Creating the Network
-
+## 创建网络
 Let's start at the beginning by creating the basis for the network:
-
+我们从开始创建网络第一步开始。
 ![network.creation](./network.diagram.2.png)
 
 *The network is formed when an orderer is started. In our example network, N,
@@ -108,6 +102,8 @@ the ordering service comprising a single node, O4, is configured according to a
 network configuration NC4, which gives administrative rights to organization
 R4. At the network level, Certificate Authority CA4 is used to dispense
 identities to the administrators and network nodes of the R4 organization.*
+
+*当一个orderer启动时，网络就形成了。在我们的示例网络N中，排序服务有一个节点O4组成，根据网络配置NC4来配置，其中管理权限被赋予组织R4.在网络层，证书颁发机构CA4用来向网络管理员和组织R4的网络节点颁发证书。*
 
 We can see that the first thing that defines a **network, N,** is an **ordering
 service, O4**. It's helpful to think of the ordering service as the initial
@@ -118,8 +114,10 @@ administrative capabilities for the network. Initially this is set to only give
 R4 rights over the network. This will change, as we'll see later, but for now R4
 is the only member of the network.
 
-### Certificate Authorities
+我们可以看到，定义**网络N**的第一件事情是一个**排序服务,O4**。把排序服务当成网络初始管理点是很有帮助的。正如之前达成的协议那样，O4是由组织R4的一个管理员首次配置和启动的，并且主机由R4管理。NC4的配置中包含了描述该网络的管理功能初始集合的策略。最初只是赋予R4整个网络的权力。这个可以变更，我们后续将会看到，但当前，整个网络中只有R4一个成员。
 
+### Certificate Authorities
+### 证书颁发机构
 You can also see a Certificate Authority, CA4, which is used to issue
 certificates to administrators and network nodes. CA4 plays a key role in our
 network because it dispenses X.509 certificates that can be used to identify
@@ -127,6 +125,7 @@ components as belonging to organization R4. Certificates issued by CAs
 can also be used to sign transactions to indicate that an organization endorses
 the transaction result -- a precondition of it being accepted onto the
 ledger. Let's examine these two aspects of a CA in a little more detail.
+
 
 Firstly, different components of the blockchain network use certificates to
 identify themselves to each other as being from a particular organization.
