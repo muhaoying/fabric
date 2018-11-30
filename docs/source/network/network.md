@@ -43,11 +43,16 @@ Moreover, network policies can change over time subject to the agreement of the
 organizations in the consortium, as we'll discover when we discuss the concept
 of *modification policy*.
 
+大多数情况下，多个[组织](../glossary.html#organization)一起组成一个[联盟](../glossary.html#consortium)来组成网络，且他们的权限是在网络初始化的时候，用一组由联盟同意的[策略](../glossary.html#policy)来定义的。另外，网络的策略随着时间根据联盟组织的协议来变更，我们将在*修改策略*的话题中讨论。
 
 ## The sample network
 
+## 示例网络
+
 Before we start, let's show you what we're aiming at! Here's a diagram
 representing the **final state** of our sample network.
+
+我们开始之前先看看我们的目标是什么。下图是表示了我们的示例网络的"最终状态"
 
 Don't worry that this might look complicated! As we go through this topic, we
 will build up the network piece by piece, so that you see how the organizations
@@ -57,6 +62,7 @@ agreed by the organizations who form the network -- for example, who can add new
 organizations. You'll discover how applications consume the ledger and smart
 contract services provided by the blockchain network.
 
+看起来有点儿复杂，不要担心！随着我们对该话题的深入探讨，我们一点一点的建立起来该网络，你将看到组织R1, R2, R3和R4将如果向该架构做贡献，to help to form it. 该架构实现了区块链网络，并且由组成该网络的组织统一的策略来治理的。例如，谁可以添加新的组织。 你将看到应用是如何访问区块链网络提供的账本和智能合约服务的。
 ![network.structure](./network.diagram.1.png)
 
 *Four organizations, R1, R2, R3 and R4 have jointly decided, and written into an
