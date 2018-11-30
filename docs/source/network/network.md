@@ -1,5 +1,5 @@
 # Blockchain network
-
+# 区块链网络
 This topic will describe, **at a conceptual level**, how Hyperledger Fabric
 allows organizations to collaborate in the formation of blockchain networks.  If
 you're an architect, administrator or developer, you can use this topic to get a
@@ -10,6 +10,9 @@ After understanding this example you can read more detailed information about
 these components elsewhere in the documentation, or try
 [building a sample network](../build_network.html).
 
+文本将在**概念层面**上描述Hpeyperledger Fabric如何让组织在区块链形式的网络中写作。如果你是架构师，管理员或者开发者，你可以通过此文 to get a solid understanding of the major structure and process components in a Hyperledger Fabric Blockchain network. 本文使用一个可以管理的实际例子来介绍区块链网络中的所有的主要组成部分。了解了本文的例子之后，you can read more detailed information about these componets eleswhere in the documentation, or try [building a sample network]
+
+
 After reading this topic and understanding the concept of policies, you will
 have a solid understanding of the decisions that organizations need to make to
 establish the policies that control a deployed Hyperledger Fabric network.
@@ -18,14 +21,19 @@ declarative policies -- a key feature of Hyperledger Fabric. In a nutshell,
 you'll understand the major technical components of Hyperledger Fabric and the
 decisions organizations need to make about them.
 
-## What is a blockchain network?
+阅读完本文，了解策略（policies）概念之后，你会深入的了解 the decisions that organizations need to make to establish the policies that control a deployed Hyperledger Fabric network. 组织需要做出得决定，来创建策略来控制一个已经部署的Hyperledger Fabric Network。你也将了解组织是如何管理网络的演进使用明确定义的策略——Hyperledger Fabric的一个关键特征。简而言之，你将了解Hyperledger Fabric的关键技术组成，和组织需要针对他们做作出的决定。
 
+
+## What is a blockchain network?
+## 什么是区块链网络？
 A blockchain network is a technical infrastructure that provides ledger and
 smart contract (chaincode) services to applications. Primarily, smart contracts
 are used to generate transactions which are subsequently distributed to every
 peer node in the network where they are immutably recorded on their copy of the
 ledger. The users of applications might be end users using client applications
 or blockchain network administrators.
+一个区块链网络是一个技术架构，向应用提供账本（ledger）和 智能合约（chaincode）服务。 通常智能合约是用来产生交易的，
+而交易将被分发到网络的各个对等节点上，并且被永久且不可篡改得记录到节点的账本副本上。应用的用户可能是使用客户端程序的终端用户或者是区块链管理员。
 
 In most cases, multiple [organizations](../glossary.html#organization) come
 together as a [consortium](../glossary.html#consortium) to form the network and
@@ -34,6 +42,7 @@ that are agreed by the consortium when the network is originally configured.
 Moreover, network policies can change over time subject to the agreement of the
 organizations in the consortium, as we'll discover when we discuss the concept
 of *modification policy*.
+
 
 ## The sample network
 
