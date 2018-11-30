@@ -77,9 +77,13 @@ work both in channel C1 and C2. Organization R3 has a client application that
 can do this on channel C2. Peer node P1 maintains a copy of the ledger L1
 associated with C1. Peer node P2 maintains a copy of the ledger L1 associated
 with C1 and a copy of ledger L2 associated with C2. Peer node P3 maintains a
-copy of the ledger L2 associated with C2. The network is governed according to
+copy of the ledger L2 associated with C2.
+
+The network is governed according to
 policy rules specified in network configuration NC4, the network is under the
-control of organizations R1 and R4. Channel C1 is governed according to the
+control of organizations R1 and R4.
+
+Channel C1 is governed according to the
 policy rules specified in channel configuration CC1; the channel is under the
 control of organizations R1 and R2.  Channel C2 is governed according to the
 policy rules specified in channel configuration CC2; the channel is under the
@@ -88,6 +92,10 @@ services as a network administration point for N, and uses the system channel.
 The ordering service also supports application channels C1 and C2, for the
 purposes of transaction ordering into blocks for distribution. Each of the four
 organizations has a preferred Certificate Authority.*
+
+*R1、R2、R3和R4，四个组织共同决定创建并使用一个Hyperledger Fabric网络，并写入协议中。R4被指定为该网络的发起者——他被授权来创建该网络的初始版本。R4没有要在网络上进行商业交易的目的。R1和R2需要在整个网络中有私密通信，R2和R3也许要私密通信。R1有个客户端应用可以在Channel C1上发起交易。R2有客户端应用可以在Channel C1和C2上发起交易。 R3的客户端应用可以在C2上发起交易。对等节点P1维护一份Channel C1的账本L1的副本。对等节点P2维护一份Channel C1的账本L1的副本和一份Channel C2的账本L2的副本。对等节点P3维护一份Channel C的账本L2的副本。网络根据网络配置文件NC4来治理，网络在R1和R4的控制之下。Channel C1的治理是依据Channel配置CC1中规定的策略原则；并在R1和R2的控制下。 Channel C2的治理是依据Channel配置CC2中规定的策略原则，且在R2和R3的控制之下。排序服务O4作为网络N的网络管理点，并且使用系统Channel。排序服务同时也支持应用Channel C1和C2，目的是将交易排序打包到区块链中以待分发。每个组织都有自己的认证机构
+
+*
 
 ## Creating the Network
 
