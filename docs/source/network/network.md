@@ -126,6 +126,8 @@ can also be used to sign transactions to indicate that an organization endorses
 the transaction result -- a precondition of it being accepted onto the
 ledger. Let's examine these two aspects of a CA in a little more detail.
 
+你还看到一个证书颁发机构CA4，用来为管理员和节点颁发证书。 CA4在我们的网络中扮演很重要的角色，因为它颁发X.509证书可以用来识别那些部分是属于组织R4的。 CA颁发的证书也可以用来签发交易来表明有一个组织为该交易的结果背书——交易被账本接受的前置条件。我们接下来详细介绍CA的这两个方面。
+
 
 Firstly, different components of the blockchain network use certificates to
 identify themselves to each other as being from a particular organization.
@@ -135,6 +137,8 @@ our network; one of for each organization. Indeed, CAs are so important that
 Hyperledger Fabric provides you with a built-in one (called *Fabric-CA*) to help
 you get going, though in practice, organizations will choose to use their own
 CA.
+
+首先，区块链网络的不同部分用证书来想别人证明他们自己是来自于某个组织的。这也是为什么一般情况下都是由多个的CA来支撑一个区块链网络——不同的组织有不同的CA。在我们的示例网路中我们将用4个CA，每个组织一个。事实上，CA是如此重要以至于Hyperledger Fabric为你提供了一个内置CA（叫 *Fabric-CA*）来帮助你在实践中走通。组织可以选择使用自己的CA。
 
 The mapping of certificates to member organizations is achieved by via
 a structure called a
@@ -147,6 +151,9 @@ rights over network resources. An example of such a policy is to identify the
 administrators in R4 who can add new member organizations to the network. We
 don't show MSPs on these diagrams, as they would just clutter them up, but they
 are very important.
+
+证书和组织机构之间的映射关系被通过一个叫做 [Membership Services Provider(MSP)](../glossary.html#membership-services).
+网络配置NC4是使用一个命名的MSP来识别CA4颁发的证书中的属性，用来将证书的所有者与组织R4关联起来。NC4接下来可以在策略中使用该MSP的名字对R4的角色进行授权访问特定的网络资源。例如，一个策略是用来识别R4的管理员，拥有为网络创建组织成员的权限。我们没有把MSP画在图片中， as they would just clutter them up, 但是他们非常重要。
 
 Secondly, we'll see later how certificates issued by CAs are at the heart of the
 [transaction](../glossary.html#transaction) generation and validation process.
