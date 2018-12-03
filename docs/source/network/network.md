@@ -216,7 +216,7 @@ organizations. For example, we might run O4 in R4 and connect it to O2, a
 separate orderer node in organization R1.  In this way, we would have a
 multi-site, multi-organization administration structure.
 
-在这种最简单的形式下，排序服务在网络中只是一个单独的节点，这就是你在例子中能看到的。排序服务通常是多节点的，并且可以配置到不同组织中的不同节点上。例如，我们可以运行O4在R4上并把它连接到O2上，一个运行在组织R1上的独立的排序节点。痛殴这种方式我们可以有多站点、多组织管理架构。
+在这种最简单的形式下，排序服务在网络中只是一个单独的节点，这就是你在例子中能看到的。排序服务通常是多节点的，并且可以配置到不同组织中的不同节点上。例如，我们可以运行O4在R4上并把它连接到O2上，一个运行在组织R1上的独立的排序节点。通过这种方式我们可以有多站点、多组织管理架构。
 
 We'll discuss the ordering service a little more [later in this
 topic](#the-ordering-service), but for now just think of the ordering service as
@@ -313,7 +313,7 @@ could have been organization R1 or R4 who created a channel C1. Again, note
 that a channel can have any number of organizations connected to it -- we've
 shown two as it's the simplest configuration.
 
-
+尽管C1是网络N的一部分，它跟网络N由非常不同。同样也要注意组织R3和R4也不再这个Channel中 —— 它是R1和R2之间的交易处理。在前面的步骤中，我们看到R4是如何给R1授权权限来创建联盟的。值得一提的是R4**也**允许R1来创建channels。在这幅图中，可能是R1也可能是R4创建的Channel C1。 注意，一个channel可以有很多组织连接————我们这里演示2个，简单起见。
 
 Again, notice how channel C1 has a completely separate configuration, CC1, to
 the network configuration NC4. CC1 contains the policies that govern the
@@ -324,6 +324,8 @@ configuration CC1. An example is defining who can add a new organization to the
 channel. Specifically, note that R4 cannot add itself to the channel C1 -- it
 must, and can only, be authorized by R1 or R2.
 
+同时，注意Channel C1是如何拥有一个独立的配置 CC1， 与网络配置NC4完全不同。 CC1包含了策略来治理R1和R2对于Channel C1的权力 ———— 同时我们也看到， R3和R4在该通道中并没有权限。 R3和R4和只有当被R1或者R2添加到Channel C1的配置文件中相应的策略中，才能与C1交互。注意，R4不能把自己加到Channel C1中 —— 它必须也只能被R1和R2授权。
+
 Why are channels so important? Channels are useful because they provide a
 mechanism for private communications and private data between the members of a
 consortium. Channels provide privacy from other channels, and from the network.
@@ -333,6 +335,8 @@ contradiction here -- different consortia within the network will have a need
 for different information and processes to be appropriately shared, and channels
 provide an efficient mechanism to do this.  Channels provide an efficient
 sharing of infrastructure while maintaining data and communications privacy.
+
+为什么channel如此重要？channel很有用，因为它提供了一种机制，是的成员和联盟之间的私有通信和私有数据共享成为可能。Channel提供和channel之间的隐私，以及和网络之间的隐私。Hyperledger Fabric的强大之处就在于让组织既可以共享基础设施同时又可以保证隐私。此处没有矛盾——网络中的不同联盟有需要保证不同的信息和处理过程合理的共享，Channel就提供了一种有效的机制来实现。Channel提供了有效的共享基础设施同时保证数据和通信的隐私。
 
 We can also see that once a channel has been created, it is in a very real sense
 "free from the network". It is only organizations that are explicitly specified
@@ -345,11 +349,16 @@ communications between the organizations constituting the channel. Moreover, the
 data in a channel is completely isolated from the rest of the network, including
 other channels.
 
+我们也可以看出来，一旦channel被创建，就真正意义上的“free from the network”。 只有在channel配置中明确表明的组织才有控制权，从现在到永远。不同的是，任何对网络配置NC4的更新，从现在起都不会直接影响channel配置CC1；例如，如果联盟定义X1被修改了，不会影响channel C1的成员。Channels因此很重要，因为他们允许本channel所组成的组织之间进行私密通信。更多，channel中的数据是完全被从网络中隔离的，包括其他channel。
+
 As an aside, there is also a special **system channel** defined for use by the
 ordering service.  It behaves in exactly the same way as a regular channel,
 which are sometimes called **application channels** for this reason.  We don't
 normally need to worry about this channel, but we'll discuss a little bit more
 about it [later in this topic](#the-ordering-service).
+
+另一方面，有一个特殊的 **系统Channel** 由排序服务定义的。它跟其他一般channel是一样，这些channel往往被称作**应用Channel**。我们不需担心这个channel，我们后续会讨论[later in this topic](#the-ordering-service).
+
 
 ## Peers and Ledgers
 
