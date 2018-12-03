@@ -361,16 +361,20 @@ about it [later in this topic](#the-ordering-service).
 
 
 ## Peers and Ledgers
+## 对等节点和账本
 
 Let's now start to use the channel to connect the blockchain network and the
 organizational components together. In the next stage of network development, we
 can see that our network N has just acquired two new components, namely a peer
 node P1 and a ledger instance, L1.
 
+我们现在使用channel来把区块链网络和组织连接起来。在区块链网络发展的下一步，我们可以看到我们的网络N只需要两个新组成部分，叫做 对等节点P1和账本实例L1.
+
 ![network.peersledger](./network.diagram.5.png)
 
 *A peer node P1 has joined the channel C1. P1 physically hosts a copy of the
 ledger L1. P1 and O4 can communicate with each other using channel C1.*
+*一个对等节点P1加入channel C1. P1物理上保存了一份账本L1的拷贝。P1和O4可以通过Channel C1来通信*
 
 Peer nodes are the network components where copies of the blockchain ledger are
 hosted!  At last, we're starting to see some recognizable blockchain components!
@@ -378,6 +382,7 @@ P1's purpose in the network is purely to host a copy of the ledger L1 for others
 to access. We can think of L1 as being **physically hosted** on P1, but
 **logically hosted** on the channel C1. We'll see this idea more clearly when we
 add more peers to the channel.
+
 
 A key part of a P1's configuration is an X.509 identity issued by CA1 which
 associates P1 with organization R1. Once P1 is started, it can **join** channel
