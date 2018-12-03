@@ -216,21 +216,27 @@ organizations. For example, we might run O4 in R4 and connect it to O2, a
 separate orderer node in organization R1.  In this way, we would have a
 multi-site, multi-organization administration structure.
 
-
+在这种最简单的形式下，排序服务在网络中只是一个单独的节点，这就是你在例子中能看到的。排序服务通常是多节点的，并且可以配置到不同组织中的不同节点上。例如，我们可以运行O4在R4上并把它连接到O2上，一个运行在组织R1上的独立的排序节点。痛殴这种方式我们可以有多站点、多组织管理架构。
 
 We'll discuss the ordering service a little more [later in this
 topic](#the-ordering-service), but for now just think of the ordering service as
 an administration point which provides different organizations controlled access
 to the network.
 
-## Defining a Consortium
+我们将在后续章节中多讨论一下排序服务 [later in this
+topic](#the-ordering-service)，单现在，我们暂且把排序服务作为一个管理点，管理不同组织的控制访问权限。
 
+## Defining a Consortium
+## 定义一个联盟
 Although the network can now be administered by R1 and R4, there is very little
 that can be done. The first thing we need to do is define a consortium. This
 word literally means "a group with a shared destiny", so it's an appropriate
 choice for a set of organizations in a blockchain network.
 
+尽管网络现在可以被R1和R4管理，他们能做的事情很有限。我们需要首先做一件事情——定义联盟。这个词语字面上的意思是“一个有共同使命的组织”，因此它将是区块链网络中的一组组织的合适选择。
+
 Let's see how a consortium is defined:
+让我们看看一个联盟是如何定义的：
 
 ![network.consortium](./network.diagram.3.png)
 
@@ -239,6 +245,7 @@ the organizations R1 and R2. This consortium definition is stored in the
 network configuration NC4, and will be used at the next stage of network
 development. CA1 and CA2 are the respective Certificate Authorities for these
 organizations.*
+*一个网络管理员定义了一个联盟X1包含两个成员，组织R1和组织R2. 这个联盟定义是存储在网络配置NC4中，并且将会被使用在下一阶段的网络开发中。CA1和CA2分别是这两个组织的证书颁发机构*
 
 Because of the way NC4 is configured, only R1 or R4 can create new consortia.
 This diagram shows the addition of a new consortium, X1, which defines R1 and R2
@@ -247,26 +254,38 @@ identify users from R2. Note that a consortium can have any number of
 organizational members -- we have just shown two as it is the simplest
 configuration.
 
+由于NC4被配置的方式，只有R1和R4才可以创建新的联盟。该图显示了新联盟X1的添加，定义了R1和R2作为组成组织。我们也可以看到CA2被添加进来用来识别R2的用户。注意一个联盟可以有任意个数的成员——我们只加了两个作为最简单的配置。
+
 Why are consortia important? We can see that a consortium defines the set of
 organizations in the network who share a need to **transact** with one another --
 in this case R1 and R2. It really makes sense to group organizations together if
 they have a common goal, and that's exactly what's happening.
 
+为什么说联盟很重要？我们可以看到一个联盟定义了一组组织在网络中可以共享一个需求来与另外一个组织交易**transact** ————本示例中是R1和R2. 如果组织们有共同的目标，把他们联盟起来非常有意义，这也是实际上发生的事情。
+
 The network, although started by a single organization, is now controlled by a
 larger set of organizations.  We could have started it this way, with R1, R2 and
 R4 having shared control, but this build up makes it easier to understand.
 
+对于这个网络，尽管从一个但一组织发起的，现在被更大一个组织群里管理。我们也可以一开始让R1、R2和R4有共同享有控制权，但是这种创建方式理解起来更容易。
+
 We're now going to use consortium X1 to create a really important part of a
 Hyperledger Fabric blockchain -- **a channel**.
 
+我们现在要使用联盟X1来创建一个Hyperledger Fabric blockchain中一个非常重要的部分————***a Channel*
+
 ## Creating a channel for a consortium
+## 为联盟创建一个Channel
 
 So let's create this key part of the Fabric blockchain network -- **a channel**.
 A channel is a primary communications mechanism by which the members of a
 consortium can communicate with each other. There can be multiple channels in a
 network, but for now, we'll start with one.
 
+所以让我们来创建Fabric 去亏啊链网络中的这个关键部分——**channel**. Channel是一个主要的通信机制，功过channel联盟中的成员可以相互通信。在一个网络中可以有多个channel，但是现在我们只从一个channel开始讲起。
+
 Let's see how the first channel has been added to the network:
+让我们看看第一个channel是如何加入网路的。
 
 ![network.channel](./network.diagram.4.png)
 
@@ -275,11 +294,15 @@ The channel is governed by a channel configuration CC1, completely separate to
 the network configuration.  CC1 is managed by R1 and R2 who have equal rights
 over C1. R4 has no rights in CC1 whatsoever.*
 
+*一个Channel C1被使用联盟定义X1为R1和R2创建起来。该Channel被channel配置CC1治理，与网络的配置完全分离。CC1被R1和R2管理，他俩对C1有同等的权力。R4在CC1中没有权力*
+
 The channel C1 provides a private communications mechanism for the consortium
 X1. We can see channel C1 has been connected to the ordering service O4 but that
 nothing else is attached to it. In the next stage of network development, we're
 going to connect components such as client applications and peer nodes. But at
 this point, a channel represents the **potential** for future connectivity.
+
+Channel C1为联盟X1提供一个私有通信机制。我们可以看到channel C1已经连接到排序服务O4上了，但是没任何其他连接。在该网络发展的下一步中，我们将要连接其他组件，比如客户端应用程序或者对等节点。但是此刻，一个channel代表了未来连接的**可能**
 
 Even though channel C1 is a part of the network N, it is quite distinguishable
 from it. Also notice that organizations R3 and R4 are not in this channel -- it
@@ -289,6 +312,8 @@ mention that R4 **also** allowed R1 to create channels! In this diagram, it
 could have been organization R1 or R4 who created a channel C1. Again, note
 that a channel can have any number of organizations connected to it -- we've
 shown two as it's the simplest configuration.
+
+
 
 Again, notice how channel C1 has a completely separate configuration, CC1, to
 the network configuration NC4. CC1 contains the policies that govern the
