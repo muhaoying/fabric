@@ -164,17 +164,24 @@ Specifically, X.509 certificates are used in client application
 who host copies of the ledger verify that transaction signatures are valid
 before accepting transactions onto the ledger.
 
+然后，我们将看到CA颁发的证书是如何在交易[transaction](../glossary.html#transaction)的生成和验证的过程中起到核心作用的。尤其是X.509证书被使用在客户端应用程序交易提案[transaction proposals](../glossary.html#proposal)和在智能合约[transaction responses](../glossary.html#response) 中来对交易[transactions](../glossary.html#transaction)进行数字签名。最后记录账本的网络节点在验证交易签名有效之后才接受这笔交易并记入账本。
+
 Let's recap the basic structure of our example blockchain network. There's a
 resource, the network N, accessed by a set of users defined by a Certificate
 Authority CA4, who have a set of rights over the resources in the network N as
 described by policies contained inside a network configuration NC4.  All of this
 is made real when we configure and start the ordering service node O4.
 
+我们来概括总结一下我们的示例区块链网络的基本结构。网络中有一个资源，网络N，被一组由证书颁发机构 CA4定义的用户访问， CA4拥有一组在network N之上的权力，被定义成策略，在网络配置NC4中定义。当我们配置并启动排序服务节点 O4时，所有这些都会变成现实。
+
+
 ## Adding Network Administrators
+## 增加网络管理员
 
 NC4 was initially configured to only allow R4 users administrative rights over
 the network. In this next phase, we are going to allow organization R1 users to
 administer the network. Let's see how the network evolves:
+NC4初始化配置只允许R4用户有管理整个网络的权力。在下一步中，我们将允许R1用户来管理网络。我们看看网络是如何演进的：
 
 ![network.admins](./network.diagram.2.1.png)
 
@@ -182,11 +189,16 @@ administer the network. Let's see how the network evolves:
 administrator too.  After this point R1 and R4 have equal rights over the
 network configuration.*
 
+*组织R4更新了网络配置使R1也成为网络管理员。之后R1和R4对整个网络配置拥有同等的权力*
+
 We see the addition of a new organization R1 as an administrator -- R1 and R4
 now have equal rights over the network. We can also see that certificate
 authority CA1 has been added -- it can be used to identify users from the R1
 organization. After this point, users from both R1 and R4 can administer the
 network.
+
+我们看到了增加了一个新的组织R1作为管理员——R1和4现在对整个网络拥有共同的权力。我们可以看到证书颁发机构CA1也加进来了——它可以用来识别组织R1的用户。这之后，来自R1和R4的用户都可以管理网络。
+
 
 Although the orderer node, O4, is running on R4's infrastructure, R1 has shared
 administrative rights over it, as long as it can gain network access. It means
@@ -195,12 +207,16 @@ organization a subset of network operations.  In this way, even though R4 is
 running the ordering service, and R1 has full administrative rights over it, R2
 has limited rights to create new consortia.
 
+尽管排序节点O4是运行在R4的基础设施上，R1分享了对它的管理权限，只要它可以获得网络访问。意味着，R1和R4可以更新网络配置NC4来允许组织R2作为网络操作的子集。如此，及时R4运行排序服务，并且R1拥有全部管理权限，R2只拥有有限的权力来创建新的联盟。
+
 In its simplest form, the ordering service is a single node in the network, and
 that's what you can see in the example. Ordering services are usually
 multi-node, and can be configured to have different nodes in different
 organizations. For example, we might run O4 in R4 and connect it to O2, a
 separate orderer node in organization R1.  In this way, we would have a
 multi-site, multi-organization administration structure.
+
+
 
 We'll discuss the ordering service a little more [later in this
 topic](#the-ordering-service), but for now just think of the ordering service as
