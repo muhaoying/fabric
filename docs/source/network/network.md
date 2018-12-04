@@ -418,6 +418,8 @@ organization R1 can use S5 to access the ledger via peer node P1.  A1, P1 and
 O4 are all joined to channel C1, i.e. they can all make use of the
 communication facilities provided by that channel.*
 
+*智能合约S5安装在P1上。客户端应用程序A1属于组织R1可以使用S5来访问账本，通过P1节点。A1，P1和O4都连接到了Channel C1上，也就是，他们都可以利用C1提供的通信设施*
+
 In the next stage of network development, we can see that client application A1
 can use channel C1 to connect to specific network resources -- in this case A1
 can connect to both peer node P1 and orderer node O4. Again, see how channels
@@ -427,12 +429,16 @@ associates it with an organization.  In our example, client application A1 is
 associated with organization R1; and although it is outside the Fabric
 blockchain network, it is connected to it via the channel C1.
 
+网络发展的下一步中，我们将看到客户应用程序A1可以使用channel C1来连接到特定的网络资源上————在这种情况下A1可以连接到对等节点P1和排序服务节点O4上。同时，看看channel是如何在网络和组织组件之间的通信中是如何占据核心地位的。就像Peers和orderers一样，客户端应用程序将拥有一个身份，与某个组织关联。 在我们的例子中，客户端应用程序A1是与组织R1相关联的；并且就算这个应用程序不在Fabric区块链网络中，它是通过channel C1连接到网络上的。
+
 It might now appear that A1 can access the ledger L1 directly via P1, but in
 fact, all access is managed via a special program called a smart contract
 chaincode, S5. Think of S5 as defining all the common access patterns to the
 ledger; S5 provides a well-defined set of ways by which the ledger L1 can
 be queried or updated. In short, client application A1 has to go through smart
 contract S5 to get to ledger L1!
+
+现在可能看起来A1是通过P1来访问账本L1的，但是，事实上，所有的访问都是通过一中特殊的程序来控制的，它叫做智能合约链码，S5. 可以认为S5是定义了所有的访问账本的公共模式；S5提供了一套well-defined的方式来查询和更新账本L1。简而言之，客户端应用程序A1需要通过智能合约S5来访问账本L1.
 
 Smart contract chaincodes can be created by application developers in each
 organization to implement a business process shared by the consortium members.
@@ -443,7 +449,10 @@ important thing to understand is that to get to this point two operations must
 have been performed on the smart contract; it must have been **installed**, and
 then **instantiated**.
 
+智能合约链码可以由每个组织的应用开发者来创建来实现被联盟成员共享的商业过程。智能合约是用来产生交易的，交易后续可以分发给网络中的每个节点。我们稍后将讨论这个点；当网络更大一些的时候，就可以更好的理解了。对于目前，最重要的事情是去理解在智能合约上执行这些操作之前，有两件事情需要做：合约必须被“安装”，然后被“实例化”
+
 ### Installing a smart contract
+### 安装一个智能合约
 
 After a smart contract S5 has been developed, an administrator in organization
 R1 must [install](../glossary.html#install) it onto peer node P1. This is a
@@ -453,11 +462,16 @@ that it uses to access the ledger L1. We contrast this to the S5 **interface**
 which merely describes the inputs and outputs of S5, without regard to its
 implementation.
 
+智能合约S5被开发完毕之后，R1的管理员必须将它安装[install](../glossary.html#install)到节点P1上。这是一个很直接的操作；安装完毕之后，P1完全知晓S5。尤其是，P1可以看到S5的**实现**逻辑————访问账本L1的代码。我们将这个对比S5的**接口**，主要描述S5的输入和输出，而不管它的实现。
+
 When an organization has multiple peers in a channel, it can choose the peers
 upon which it installs smart contracts; it does not need to install a smart
 contract on every peer.
 
+当一个组织在一个channel中有多个节点的时候，它可以选择在哪个节点上安装智能合约，不需要在每个节点上都安装。
+
 ### Instantiating a smart contract
+### 实例化一个智能合约
 
 However, just because P1 has installed S5, the other components connected to
 channel C1 are unaware of it; it must first be
@@ -466,6 +480,8 @@ which only has a single peer node P1, an administrator in organization R1 must
 instantiate S5 on channel C1 using P1. After instantiation, every component on
 channel C1 is aware of the existence of S5; and in our example it means that S5
 can now be [invoked](../glossary.html#invoke) by client application A1!
+
+尽管如此，因为只有P1安装了S5, 连接到C1的其他组成部分是不知道S5的存在的；它必须首先在C1上实例化[instantiated](../glossary.html#instantiate) 。在我们的例子中，只有一个对等节点P1，组织R1的管理员必须哎channel C1上实例化S5。实例化之后，每个channel C1上的组成部分都会知道S5的存在；并且在我们的例子中，它一位置S5现在可以被客户端程序A1调用了 [invoked](../glossary.html#invoke) 
 
 Note that although every component on the channel can now access S5, they are
 not able to see its program logic.  This remains private to those nodes who have
@@ -476,18 +492,24 @@ installing a smart contract shows how we think of it being **physically hosted**
 on a peer, whereas instantiating a smart contract shows how we consider it
 **logically hosted** by the channel.
 
-### Endorsement policy
+注意，尽管现在Channel C1上的每个组件都可以访问S5， 他们却无法看到程序的逻辑。只有安装了该智能合约的节点才可以看到；在我们的例子终究是P1. 概念上，这意味着只有智能合约的**接口**被实例化了，相对智能合约的**实现**被安装。为了强调这一点，安装一个智能合约体现了我们是如何理解被一个节点**物理所有**，而实例化一个智能合约则体现了我们认为它被channel**逻辑所有**
 
+### Endorsement policy
+### 背书策略
 The most important piece of additional information supplied at instantiation is
 an [endorsement policy](../glossary.html#endorsement-policy). It describes which
 organizations must approve transactions before they will be accepted by other
 organizations onto their copy of the ledger. In our sample network, transactions
 can be only be accepted onto ledger L1 if R1 or R2 endorse them.
 
+实例化合约时提供的附加信息中最重要的就是背书策略了[endorsement policy](../glossary.html#endorsement-policy).背书策略描述了那些组织必须批准交易，在交易可以被其他组织记录到他们的账本上之前。在我们的实例网络中，交易可以被L1接受，只有当R1或者R2背书之后。
+
 The act of instantiation places the endorsement policy in channel configuration
 CC1; it enables it to be accessed by any member of the channel. You can read
 more about endorsement policies in the
 [transaction flow topic](../txflow.html).
+
+
 
 ### Invoking a smart contract
 
