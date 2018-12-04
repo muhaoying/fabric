@@ -383,6 +383,7 @@ to access. We can think of L1 as being **physically hosted** on P1, but
 **logically hosted** on the channel C1. We'll see this idea more clearly when we
 add more peers to the channel.
 
+对等节点是网络的组成部分用来保存区块链账本的副本。最后，我们开始看看一些可识别的区块链组件。P1在网络中的目的只是来保存账本L1的拷贝，供其他人访问。我们可以认为L1是**物理存在**于P1的，但是**逻辑存在**Channel C1. 当有更多的peer加入channel的时候，这个idea就可以理解的更清楚了。
 
 A key part of a P1's configuration is an X.509 identity issued by CA1 which
 associates P1 with organization R1. Once P1 is started, it can **join** channel
@@ -390,18 +391,25 @@ C1 using the orderer O4. When O4 receives this join request, it uses the channel
 configuration CC1 to determine P1's permissions on this channel. For example,
 CC1 determines whether P1 can read and/or write information to the ledger L1.
 
+P1配置的关键部分是X.509身份，由与P1关联的CA1所颁发，一旦P1启动了，它就可以通过orderer O4 **加入**channel C1。当O4接手到这个加入请求时，它使用Channel配置CC1来确定P1在这个channel上权限。例如，CC1决定P1是否可以读写账本L1上的信息。
+
 Notice how peers are joined to channels by the organizations that own them, and
 though we've only added one peer, we'll see how  there can be multiple peer
 nodes on multiple channels within the network. We'll see the different roles
 that peers can take on a little later.
 
+注意Peer是如何通过他们所在的组织加入Channel的，并且尽管我们只加了一个peer，我们将看到在网络中有多个channel，多个节点的样子。我们后续将看到部门的peer有不同的角色。
+
 ## Applications and Smart Contract chaincode
+## 应用程序和智能合约链码
 
 Now that the channel C1 has a ledger on it, we can start connecting client
 applications to consume some of the services provided by workhorse of the
 ledger, the peer!
+现在channel C1有一个账本在上面，我们可以我们开始把用户端程序连接上来，来使用一些账本的workhorse--peer提供的服务。
 
 Notice how the network has grown:
+注意，网络是如何增长的。
 
 ![network.appsmartcontract](./network.diagram.6.png)
 
