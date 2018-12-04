@@ -1031,7 +1031,7 @@ provided by their home organization, but that's certainly not always the case.
 我们可以看到这个排序服务是完全去重新化的 ———— 它在组织R1和R4中运行。网络配置策略NC4，允许R1和R4可以平等管理网络资源。客户端应用程序和R1和R4的对等节点可以管理网络资源，通过连接到O1或者O4上，因为两个节点的行为是一样的，就是在网络配置NC4的策略中。在实践中，actors from a particular organization *tend* to use infrastructure provided by their home organization, but that's certainly not always the case.
 
 ### De-centralized transaction distribution
-### 
+### 去中心化交易分发
 
 As well as being the management point for the network, the ordering service also
 provides another key facility -- it is the distribution point for transactions.
@@ -1040,6 +1040,8 @@ from applications and orders them into transaction blocks, which are
 subsequently distributed to every peer node in the channel. At each of these
 committing peers, transactions are recorded, whether valid or invalid, and their
 local copy of the ledger updated appropriately.
+
+作为整个网络的管理点的同时，排序服务同时也提供另外一个关键功能——那就是交易的分发点。排序服务组件从应用程序哪里收集背书的交易并将其排序打包到交易块中，然后把它们分布到channel的各个对等节点中。在每个提交节点，交易被记录，无论有效还是无效，它们的本地账本都得到更新。
 
 Notice how the ordering service node O4 performs a very different role for the
 channel C1 than it does for the network N. When acting at the channel level,
@@ -1053,18 +1055,22 @@ reinforce to you the importance of declarative policy based configuration in
 Hyperledger Fabric. Policies both define, and are used to control, the agreed
 behaviours by each and every member of a consortium.
 
+
+
 We can see that the ordering service, like the other components in Hyperledger
 Fabric, is a fully de-centralized component. Whether acting as a network
 management point, or as a distributor of blocks in a channel, its nodes can be
 distributed as required throughout the multiple organizations in a network.
 
 ### Changing policy
+### 变更策略
 
 Throughout our exploration of the sample network, we've seen the importance of
 the policies to control the behaviour of the actors in the system. We've only
 discussed a few of the available policies, but there are many that can be
 declaratively defined to control every aspect of behaviour. These individual
 policies are discussed elsewhere in the documentation.
+通过我们对整个实例网络的解释，我们已经看到
 
 Most importantly of all, Hyperledger Fabric provides a uniquely powerful policy
 that allows network and channel administrators to manage policy change itself!
