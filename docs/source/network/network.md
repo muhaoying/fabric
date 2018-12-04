@@ -509,9 +509,10 @@ CC1; it enables it to be accessed by any member of the channel. You can read
 more about endorsement policies in the
 [transaction flow topic](../txflow.html).
 
-
+实例化动作将背书策略放到了channel配置CC1中，它让channel的其他memeber都可以访问该合约。你可以在[transaction flow topic](../txflow.html)中了解更多关于背书策略。
 
 ### Invoking a smart contract
+### 调用智能合约
 
 Once a smart contract has been installed on a peer node and instantiated on a
 channel it can be [invoked](../glossary.html#invoke) by a client application.
@@ -521,11 +522,15 @@ transaction proposal serves as input to the smart contract, which uses it to
 generate an endorsed transaction response, which is returned by the peer node to
 the client application.
 
+一旦一个智能合约在一个peer上被安装，且在一个channel上被实例化，它就可以被客户端应用程序调用了。客户端应用程序调用智能合约的过程是通过向该合约的背书策略中描述的组织所拥有的节点发送交易提案。交易提案是智能合约的输入，智能合约使用它来产生一个背书的交易响应，由peer节点返回给客户端应用程序。
+
 It's these transactions responses that are packaged together with the
 transaction proposal to form a fully endorsed transaction, which can be
 distributed to the entire network.  We'll look at this in more detail later  For
 now, it's enough to understand how applications invoke smart contracts to
 generate endorsed transactions.
+
+交易响应和交易提案一起打包形成一个完全背书的可以全网络分发的交易。我们后续将详细探讨，现在，你已经可以理解应用是如何调用智能合约并生成背书交易的了。
 
 By this stage in network development we can see that organization R1 is fully
 participating in the network. Its applications -- starting with A1 -- can access
@@ -533,13 +538,19 @@ the ledger L1 via smart contract S5, to generate transactions that will be
 endorsed by R1, and therefore accepted onto the ledger because they conform to
 the endorsement policy.
 
+网络发展到这一步，我们可以看到组织R1是充分参与的网络中的。它的应用程序 ———— 从A1开始 ———— 可以访问账本L1通过智能合约S5，来产生交易由R1背书，之后被账本接受，因为它们符合背书策略。
+
 ## Network completed
+## 网络完成
 
 Recall that our objective was to create a channel for consortium X1 --
 organizations R1 and R2. This next phase of network development sees
 organization R2 add its infrastructure to the network.
 
+回想我们的目标是为联盟X1——组织R1和R2，创建一个channel。网络发展的下一个阶段将见证组织R2将它的设施加入到网络中。
+
 Let's see how the network has evolved:
+让我一起来卡看网络是如何演进的：
 
 ![network.grow](./network.diagram.7.png)
 
@@ -550,18 +561,25 @@ A2. A2 and P2 are identified using certificates from CA2. All of this means
 that both applications A1 and A2 can invoke S5 on C1 either using peer node P1
 or P2.*
 
+*网络通过添加组织R2的设施而增长。尤其是R2增加了对等节点P2，也保存了账本L1的部分，和S5.P2也加如了channel C1， 并拥有一个应用程序A2. A2和P2通过CA2发的证书来识别。所有的这些都意味着应用程序A1和A2都可以调用C1上的S5，通过节点P1或者P2*
+
 We can see that organization R2 has added a peer node, P2, on channel C1. P2
 also hosts a copy of the ledger L1 and smart contract S5. We can see that R2 has
 also added client application A2 which can connect to the network via channel
 C1.  To achieve this, an administrator in organization R2 has created peer node
 P2 and joined it to channel C1, in the same way as an administrator in R1.
 
+我们看到，组织R2添加了一个节点P2到channel C1上。P2也维护了一份账本L1的拷贝和智能合约S5.我们可以看到R2也添加了客户端应用程序A2到网络中，通过连接到Channel C1上。要完成这些，组织R2的管理员需要创建一个对等节点P2，并把它连接到channel C1上，像R1的管理员一样。
+
 We have created our first operational network! At this stage in network
 development, we have a channel in which organizations R1 and R2 can fully
 transact with each other.  Specifically, this means that applications A1 and A2
 can generate transactions using smart contract S5 and ledger L1 on channel C1.
 
+我们已经创建了我们的第一个可操作网络。网络发展到这一步，我们有一个channel，里面有组织R1和R2可以充分彼此交易。尤其是，这意味着应用程序A1和A2可以产生交易，使用智能合约S5和L1在channel C1上。
+
 ### Generating and accepting transactions
+### 生成和接受交易
 
 In contrast to peer nodes, which always host a copy of the ledger, we see that
 there are two different kinds of peer nodes; those which host smart contracts
@@ -571,6 +589,8 @@ host a copy of the smart contract. A peer can only *run* a smart contract if it
 is installed on it, but it can *know* about the interface of a smart contract by
 being connected to a channel.
 
+与保存账本副本的对等节点相比，我们还可以看到两种节点，一种是维护智能合约的节点，另一种不维护智能合约。在我们的网路哦中，每个节点都维护了一个智能合约的副本，但是在账本网络中，有很多节点也不维护智能合约。 只有安装了智能合约的节点才能*运行*智能合约，但是它可以*知道*一个智能合约的接口，通过连接到一个channel上。
+
 You should not think of peer nodes which do not have smart contracts installed
 as being somehow inferior. It's more the case that peer nodes with smart
 contracts have a special power -- to help **generate** transactions. Note that
@@ -579,22 +599,30 @@ transactions onto their copy of the ledger L1. However, only peer nodes with a
 smart contract installed can take part in the process of transaction
 **endorsement** which is central to the generation of valid transactions.
 
+你不可以认为一个不安装智能合约的节点对比安装了智能合约的节点是一个低级节点。安装了智能合约的节点有一个特殊的能力————帮助**生成**交易。注意所有的对等节点都可以**验证**和后续**接受**或者**拒绝**将交易记录到它们的账本L1的不笨上。但是，只有安装了智能合约的对等节点才能**背书**交易，这一点对产生一个有效的交易非常关键。
+
+
 We don't need to worry about the exact details of how transactions are
 generated, distributed and accepted in this topic -- it is sufficient to
 understand that we have a blockchain network where organizations R1 and R2 can
 share information and processes as ledger-captured transactions.  We'll learn a
 lot more about transactions, ledgers, smart contracts in other topics.
 
+在本讨论正，我们不必纠结一个交易是如何产生的、分发的、接受的细节————我们知道在我们的区块链网络中两个组织R1和R2可以共享信息和过程做为账本记录的交易就足够了。我们将在其他话题中了解更多的交易、账本、智能合约。
+
 ### Types of peers
+### 节点类型
 
 In Hyperledger Fabric, while all peers are the same, they can assume multiple
 roles depending on how the network is configured.  We now have enough
 understanding of a typical network topology to describe these roles.
+在Hyperledger Fabric中，所有的节点都是一样的，但是依据网路的配置的不同，它们有不同的角色。我们已经有了对网络拓扑结构足够的了解来描述这些角色
 
   * [*Committing peer*](../glossary.html#commitment). Every peer node in a
     channel is a committing peer. It receives blocks of generated transactions,
     which are subsequently validated before they are committed to the peer
     node's copy of the ledger as an append operation.
+  * 提交节点[*Committing peer*](../glossary.html#commitment)。在channel中的每个对等节点都是一个提交节点。它接收生成的交易的     blocks，它们在被提交到节点并添加到账本副本之前会被验证。
 
   * [*Endorsing peer*](../glossary.html#endorsement). Every peer with a smart
     contract *can* be an endorsing peer if it has a smart contract installed.
@@ -602,19 +630,22 @@ understanding of a typical network topology to describe these roles.
     must be used by a client application to generate a digitally signed
     transaction response. The term *endorsing peer* is an explicit reference to
     this fact.
-
+  * 背书节点[*Endorsing peer*](../glossary.html#endorsement).每个安装了智能合约的节点都*可以*作为背书节点。但是，*成为*一个     真正的背书节点，它的智能合约必须被客户端应用程需调用产生一个数字签名的交易响应。术语*endorsing peer*是对这一事实的显示引用。
     An endorsement policy for a smart contract identifies the
     organizations whose peer should digitally sign a generated transaction
     before it can be accepted onto a committing peer's copy of the ledger.
+    智能合约的背书策略表明了那些组织的peer需要数字签名一个交易，交易节点才能接受。
 
 These are the two major types of peer; there are two other roles a peer can
 adopt:
+这是两种类型的节点；一个节点还有两种角色。
 
   * [*Leader peer*](../glossary.html#leading-peer). When an organization has
     multiple peers in a channel, a leader peer is a node which takes
     responsibility for distributing transactions from the orderer to the other
     committing peers in the organization.  A peer can choose to participate in
     static or dynamic leadership selection.
+  * [*Leader peer*](../glossary.html#leading-peer). 当一个组织在一个channel中有多个节点时，首节点需要负责把从orderer接收的交易分发给其他的提交节点。一个节点可以选择参与静态或动态leadership选举。
 
     It is helpful, therefore to think of two sets of peers from leadership
     perspective -- those that have static leader selection, and those with
@@ -622,6 +653,8 @@ adopt:
     configured as leaders. For the dynamic set, one peer will be elected leader
     by the set. Moreover, in the dynamic set, if a leader peer fails, then the
     remaining peers will re-elect a leader.
+    这是有用的，因此想想有抗
+    
 
     It means that an organization's peers can have one or more leaders connected
     to the ordering service. This can help to improve resilience and scalability
@@ -955,12 +988,15 @@ lines and connections. You can see that they are equivalent; they are visual
 synonyms.
 
 ### The ordering service
-
+### 排序服务
 The observant reader may notice that the ordering service node appears to be a
 centralized component; it was used to create the network initially, and connects
 to every channel in the network.  Even though we added R1 and R4 to the network
 configuration policy NC4 which controls the orderer, the node was running on
 R4's infrastructure. In a world of de-centralization, this looks wrong!
+
+善于观察的读者已经发现，排序服务节点是是一个核心组件；它是用来最初创建网络的，并且连接到网络中每个channel。即使我们后来添加了R1和R4到网络配置策略NC4控制orderer，节点是运行在R4的设施上。在去中心化的世界中，这看起来是错的。
+
 
 Don't worry! Our example network showed the simplest ordering service
 configuration to help you understand the idea of a network administration point.
@@ -969,7 +1005,10 @@ mentioned earlier that an ordering service could be comprised of many individual
 nodes owned by different organizations, so let's see how that would be done in
 our sample network.
 
+不要担心，在我们的实例网络中，演示了简单的排序服务配置，来帮助你理解网络的管理点。实施上，排序服务自身也可以是非常去中心化的！我们之前提到，一个排序服务可以分解成多个独立节点，分属不同的组织，所以我们看看如何在我们的实例网络中实现。
+
 Let's have a look at a more realistic ordering service node configuration:
+让我们看看一个更实际的排序服务节点配置。
 
 ![network.finalnetwork2](./network.diagram.15.png)
 
@@ -977,6 +1016,8 @@ Let's have a look at a more realistic ordering service node configuration:
 service nodes O1 and O4. O1 is provided by organization R1 and node O4 is
 provided by organization R4. The network configuration NC4 defines network
 resource permissions for actors from both organizations R1 and R4.*
+
+*一个多组织的排序服务。排序服务由排序节点O1和排序节点O4组成。O1是有组织R1提供的，O4是由组织R4组成的。网络配置NC4为R1和R4的角色定义了网络资源权限*
 
 We can see that this ordering service completely de-centralized -- it runs in
 organization R1 and it runs in organization R4. The network configuration
@@ -987,7 +1028,10 @@ the same way, as defined by the policies in network configuration NC4. In
 practice, actors from a particular organization *tend* to use infrastructure
 provided by their home organization, but that's certainly not always the case.
 
+我们可以看到这个排序服务是完全去重新化的 ———— 它在组织R1和R4中运行。网络配置策略NC4，允许R1和R4可以平等管理网络资源。客户端应用程序和R1和R4的对等节点可以管理网络资源，通过连接到O1或者O4上，因为两个节点的行为是一样的，就是在网络配置NC4的策略中。在实践中，actors from a particular organization *tend* to use infrastructure provided by their home organization, but that's certainly not always the case.
+
 ### De-centralized transaction distribution
+### 
 
 As well as being the management point for the network, the ordering service also
 provides another key facility -- it is the distribution point for transactions.
