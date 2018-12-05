@@ -8,6 +8,8 @@ In order to execute chaincode on peers, submit transactions to orderers, and to
 be updated about the status of transactions, applications connect to an API
 exposed by an SDK.
 
+为了能在peer上执行链码，向orderers提交交易，接受交易状态更新，应用程序连接到SDK暴露的API上。
+
 However, the SDK needs a lot of information in order to allow applications to
 connect to the relevant network nodes. In addition to the CA and TLS certificates
 of the orderers and peers on the channel -- as well as their IP addresses and port
@@ -15,23 +17,31 @@ numbers -- it must know the relevant endorsement policies as well as which peers
 have the chaincode installed (so the application knows which peers to send chaincode
 proposals to).
 
+但是SDK需要很多信息，为了让应用程序来连接到相关的网络节点上。除了channel上的orderer和peers的CA和TLS证书 ———— 加上他们的IP地址和端口号 ———— 它必须知道相关的背书策略和那些peer安装了链码（这样应用程序就知道要往哪个节点上发送交易提案了）
+
 Prior to v1.2, this information was statically encoded. However, this implementation
 is not dynamically reactive to network changes (such as the addition of peers who have
 installed the relevant chaincode, or peers that are temporarily offline). Static
 configurations also do not allow applications to react to changes of the
 endorsement policy itself (as might happen when a new organization joins a channel).
 
+V1.2之前，这些信息都是静态硬编码的。但是，这种实现方式不能动态响应网络的变更（例如，增加了peer，且peer上安装了相关的链码，或者peer是临时下线）。静态配置同样也不允许应用程序响应背书策略的更新（比如 当有心的组织加入到channel中时）
+
 In addition, the client application has no way of knowing which peers have updated
 ledgers and which do not. As a result, the application might submit proposals to peers whose ledger data is
 not in sync with the rest of the network, resulting in transaction being invalidated
 upon commit and wasting resources as a consequence.
 
+另外，客户端应用程序是没有办法知道哪个peer更新了账本，哪个peer没有更新账本。结果，应用程序可能把提案提交给了那些没有同步账本的节点，导致交易无效，浪费资源。
+
 The **discovery service** improves this process by having the peers compute
 the needed information dynamically and present it to the SDK in a consumable
 manner.
 
+**发现服务**提升了这个过程，通过让节点动态计算所需的信息并把这些信息提交给SDK，以可消费的方式。
 
 How service discovery works in Fabric
+Fabric的服务发现是如何工作的
 -------------------------------------
 
 The application is bootstrapped knowing about a group of peers which are
