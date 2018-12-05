@@ -41,9 +41,9 @@ manner.
 **发现服务**提升了这个过程，通过让节点动态计算所需的信息并把这些信息提交给SDK，以可消费的方式。
 
 How service discovery works in Fabric
-Fabric的服务发现是如何工作的
 -------------------------------------
-
+Fabric的服务发现是如何工作的
+------------------------
 The application is bootstrapped knowing about a group of peers which are
 trusted by the application developer/administrator to provide authentic responses
 to discovery queries. A good candidate peer to be used by the client application
