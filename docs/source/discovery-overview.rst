@@ -49,32 +49,37 @@ trusted by the application developer/administrator to provide authentic response
 to discovery queries. A good candidate peer to be used by the client application
 is one that is in the same organization.
 
+应用程序启动是就知道一组被应用程序开发者和管理员信任的peer，这些peer对于服务发现请求可以返回可信的记过。可被客户端应用程序信任的候选节点最好就是同一个组织下的节点。
 
 The application issues a configuration query to the discovery service and obtains
 all the static information it would have otherwise needed to communicate with the
 rest of the nodes of the network. This information can be refreshed at any point
 by sending a subsequent query to the discovery service of a peer.
 
-
+应用程序发起一个配置请求来发现服务，并且获取所有的静态信息它将否则需要与网络中的其他节点通信来获取。此信息可以随时更新，通过向peer发送一个后续的请求来发现服务。
 
 The service runs on peers -- not on the application -- and uses the network metadata
 information maintained by the gossip communication layer to find out which peers
 are online. It also fetches information, such as any relevant endorsement policies,
 from the peer's state database.
 
-
+该服务在peer上运行 ———— 不是在应用程序上 ————并且使用网络元数据信息，被gossip通信曾维护，来发现哪些peer是在线的。它同时也获取信息，诸如任何相关的背书策略，从peer的state数据库中。
 
 With service discovery, applications no longer need to specify which peers they
 need endorsements from. The SDK can simply send a query to the discovery service
 asking which peers are needed given a channel and a chaincode ID. The discovery
 service will then compute a descriptor comprised of two objects:
 
+有了服务发现，应用程序不用在去说明他们需要哪些peer的背书。SDK可以简单的发送一个请求到发现服务，询问哪些peer是需要的，只哟啊提供一个channel和一个链码ID。发现服务将会计算一个描述，包含两个对象：
+
 1. **Layouts**: a list of groups of peers and a corresponding amount of peers from
    each group which should be selected.
+   **布局**: 一个列表，包含一些peer的group，和一个相对应的peer的数量，每组应该选出。
 2. **Group to peer mapping**: from the groups in the layouts to the peers of the
    channel. In practice, each group would most likely be peers that represent
    individual organizations, but because the service API is generic and ignorant of
    organizations this is just a "group".
+   **group和peer的映射**：从布局中的group到channel上的peer。 在实践中，每个组都是peers表示一个独立的组织，但是因为服务API是一般化的，并忽视组织概念，这就是一个“group组”
 
 The following is an example of a descriptor from the evaluation of a policy of
 ``AND(Org1, Org2)`` where there are two peers in each of the organizations.
@@ -96,10 +101,14 @@ In other words, the endorsement policy requires a signature from one peer in Org
 and one peer in Org2. And it provides the names of available peers in those orgs who
 can endorse (``peer0`` and ``peer1`` in both Org1 and in Org2).
 
+换句话说，背书策略要求一个org1的peer和一个org2的peer来签名。 并且它提供了有效的peer在这些org中，可以背书（在org1和org2中都是peer0和peer1）
+
 The SDK then selects a random layout from the list. In the example above, the
 endorsement policy is Org1 ``AND`` Org2. If instead it was an ``OR`` policy, the SDK
 would randomly select either Org1 or Org2, since a signature from a peer from either
 Org would satisfy the policy.
+
+SDK然后就可以从列表中随机选择出一个布局。在上面的例子中，背书策略是Org1 “AND” Org2。如果是OR策略，SDK就随机选择Org1或者Org2，因为任何一个组织的任何一个peer的签名都满足这个策略。
 
 After the SDK has selected a layout, it selects from the peers in the layout based on a
 criteria specified on the client side (the SDK can do this because it has access to
@@ -109,8 +118,14 @@ over others -- or to exclude peers that the application has discovered to be off
 peer is preferable based on the criteria, the SDK will randomly select from the peers
 that best meet the criteria.
 
+SDK可以选择一个布局之后，它会依据客户端的一个原则来从布局总选择peer（SDK可以做这个，因为它可以访问诸如账本高度等的元数据）。例如，他可以选择peer有比别人高的账本高度 ———— 或者把那些在服务发现是得知是下线的节点。根据布局中每个组织的节点的数目。如果根据这些原则没有节点被选中，SDK就会随机选一个，最能满足这些原则的。
+
 Capabilities of the discovery service
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+发现服务的能力
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 The discovery service can respond to the following queries:
 
