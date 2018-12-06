@@ -128,21 +128,30 @@ Capabilities of the discovery service
 
 
 The discovery service can respond to the following queries:
+发现服务可以响应以下查询：
 
 * **Configuration query**: Returns the ``MSPConfig`` of all organizations in the channel
   along with the orderer endpoints of the channel.
+  **配置查询** 返回channel中所有组织的``MSPConfig``，和orderer的endpoints。
 * **Peer membership query**: Returns the peers that have joined the channel.
+  **Peer成员查询**: 返回所有的加入channel的peer
 * **Endorsement query**: Returns an endorsement descriptor for given chaincode(s) in
   a channel.
+  **背书查询** 对于一个channel上的某个链码，返回背书描述。
 * **Local peer membership query**: Returns the local membership information of the
   peer that responds to the query. By default the client needs to be an administrator
   for the peer to respond to this query.
+  **本地peer memebership 查询**：返回peer的本地的membership信息 相应查询的。 默认情况下客户端需要是peer的一个管理员才能相应这个查询。
 
 Special requirements
 ~~~~~~~~~~~~~~~~~~~~~~
+
+特殊需求
+~~~~~~~~~~~~~~~~~~~~~~
+
 When the peer is running with TLS enabled the client must provide a TLS certificate when connecting
-to the peer. If the peer isn't configured to verify client certificates (clientAuthRequired is false), this TLS certificate
-can be self-signed.
+to the peer. If the peer isn't configured to verify client certificates (clientAuthRequired is false), this TLS certificate can be self-signed.
+当peer运行是带有TLS的，客户端必须提供一个TLS证书才能连接到peer上。如果peer没有配置成验证客户端证书的，这个TLS证书可以是自签名的。
 
 .. Licensed under Creative Commons Attribution 4.0 International License
    https://creativecommons.org/licenses/by/4.0/
