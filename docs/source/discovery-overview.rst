@@ -38,7 +38,7 @@ The **discovery service** improves this process by having the peers compute
 the needed information dynamically and present it to the SDK in a consumable
 manner.
 
-**发现服务**提升了这个过程，通过让节点动态计算所需的信息并把这些信息提交给SDK，以可消费的方式。
+ **发现服务**提升了这个过程，通过让节点动态计算所需的信息并把这些信息提交给SDK，以可消费的方式。
 
 How service discovery works in Fabric
 -------------------------------------
@@ -49,15 +49,20 @@ trusted by the application developer/administrator to provide authentic response
 to discovery queries. A good candidate peer to be used by the client application
 is one that is in the same organization.
 
+
 The application issues a configuration query to the discovery service and obtains
 all the static information it would have otherwise needed to communicate with the
 rest of the nodes of the network. This information can be refreshed at any point
 by sending a subsequent query to the discovery service of a peer.
 
+
+
 The service runs on peers -- not on the application -- and uses the network metadata
 information maintained by the gossip communication layer to find out which peers
 are online. It also fetches information, such as any relevant endorsement policies,
 from the peer's state database.
+
+
 
 With service discovery, applications no longer need to specify which peers they
 need endorsements from. The SDK can simply send a query to the discovery service
