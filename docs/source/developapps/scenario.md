@@ -68,11 +68,15 @@ making it a profit of 10K USD for bearing the increased risk associated with
 this commercial paper. This extra 10K means it receives a 2.4% return on
 investment -- significantly better than the risk free return of 2%.
 
+五月底，MagnetoCorp需要5M USD来支付5月1日新招入的员工的工资。为了做到这一点，它发行了一种商业票据，面值是5M USD，未来6个月之后到期——届时他们将预期会见到来自Daintree的现金流。 DigiBank认为MagetoCorp是信誉良好的，并且不需要much of a premium above the central bank base rate of 2%, 未来6个月的5M USD现在值4.95M USD。 于是它购买了MeagnetoCorp的6个月的商业票据以4.94M USD的价格 ———— 比4.95M USD有一点折扣。 DigiBank希望6个月之后从MagetoCorp赎回5M USD，利润是10K USD，承担此商业票据的增加的风险。这多出来的10K一位置2.4%的投资回报 ———— 显然比无风险回报率2%要高很多。
+
 At the end of June, when MagnetoCorp issues a new commercial paper for 5M USD to
 meet June's payroll, it is purchased by BigFund for 4.94M USD.  That's because
 the commercial conditions are roughly the same in June as they are in May,
 resulting in BigFund valuing MagnetoCorp commercial paper at the same price that
 DigiBank did in May.
+
+到了6月底，当MagnetoCorp发行了一张新的5M USD商业票据 来支付六月的工资是，它被BigFund以4.94M USD的价格购买。这是因为商业环境在六月跟五月是差不多一样的，导致了BigFund对MagnetoCorp的商业票据的估值跟DigiBank在五月份的估值一样。
 
 Each subsequent month, MagnetoCorp can issue new commercial paper to meet its
 payroll obligations, and these may be purchased by DigiBank, or any other
@@ -83,10 +87,14 @@ with MagnetoCorp. This latter figure depends on a variety of factors such as the
 production of Model D cars, and the creditworthiness of MagnetoCorp as assessed
 by RateM, a ratings agency.
 
+后面的每个月， MagnetoCorp都可以发行一种新的商业票据来满足工资支付，并且这些商业票据会被DigiBank或者其他的PaperNet商业票据网路的参与者所购买 ———— BigFund， HedgeMatic 或者BrokerHouse。 这些组织支付或多或少的钱来买这些商业票据依据两个元素 ———— 中心银行的汇率，和MagetoCorp的风险。后面一个指标依赖于多项元素，诸如D型轿车的生产、和MagnetoCorp被信用机构的信用评估，诸如RateM。
+
 Let's pause the MagnetoCorp story for a moment, and develop the client
 applications and smart contracts that PaperNet uses to issue, buy, sell and
 redeem commercial paper.  We'll come back to the role of the rating agency,
 RateM, a little later.
+
+我们先暂停对MagnetoCorp的故事，来开发一下PaperNet所需要的客户端应用程序和智能合约来发行、购买、出售和赎回的商业票据。我们将之后将讨论评估机构，RateM。
 
 <!--- Licensed under Creative Commons Attribution 4.0 International License
 https://creativecommons.org/licenses/by/4.0/ -->
