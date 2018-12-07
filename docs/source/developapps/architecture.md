@@ -1,7 +1,9 @@
 # Process and Data Design
+# 处理过程和数据设计
 
 **Audience**: Architects, Application and smart contract developers, Business
 professionals
+**读者**： 架构师，应用程序和智能合约开发者，业务专家
 
 This topic shows you how to design the commercial paper processes and their
 related data structures in PaperNet. Our [analysis](./analysis.html) highlighted
@@ -10,7 +12,10 @@ understand what's happening. We're now going to elaborate on these two strongly
 related concepts to help us subsequently design the smart contracts and
 applications of PaperNet.
 
+本文向你展示如何设计商业票据过程和与他们相关的数据结构在PaperNet中，我们的[analysis](./analysis.html)强调了使用状态和交易建模PaperNet提供了一之中精确的方式来理解发生了什么。 我们现在要届时这两个强相关的概念来帮我们后续在PaperNet上设计智能合约和应用
+
 ## Lifecycle
+## 生命周期
 
 As we've seen, there are two important concepts that concern us when dealing
 with commercial paper; **states** and **transactions**. Indeed, this is true for
@@ -19,8 +24,11 @@ states, whose lifecycle transitions are described by transactions. An effective
 analysis of states and transactions is an essential starting point for a
 successful implementation.
 
+我们看到，当我们在交易商业票据是，有两个重要的概念要我们考虑；**状态**和**交易**。实际上，这个适用所有的区块链用例；有概念上的对象和值，被建模成状态，他们的生命周期变迁被描述为交易。对状态和交易的有解释是一个成功是实施的最有意义的开始。
+
 We can represent the life cycle of a commercial paper using a state transition
 diagram:
+我们可以用用一个状态迁移图来表示商业票据的生命周期
 
 ![develop.statetransition](./develop.diagram.4.png) *The state transition
 diagram for commercial paper. Commercial papers transition between **issued**,
