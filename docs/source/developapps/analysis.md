@@ -1,7 +1,9 @@
-# Analysis
+# Analysis 分析
 
 **Audience**: Architects, Application and smart contract developers, Business
 professionals
+
+**读者**： 架构师，应用和智能合约开发者，业务专家
 
 Let's analyze commercial paper in a little more detail. PaperNet participants
 such as MagnetoCorp and DigiBank use commercial paper transactions to achieve
@@ -10,10 +12,14 @@ and the transactions that affect it over time. Later we'll focus on how money
 flows between buyers and sellers; for now, let's focus on the first paper issued
 by MagnetoCorp.
 
+我们来深入一些分析商业票据。PaperNet参与了MagnetoCorp和DigiBank使用商业票据交易来取得他们的商业目标 ———— 让我们来检查一下商业票据的架构，和将一直影响他们的交易。然后我们将关注在在资金是如何从买家流向买家的，现在，我们将关注第一张由MagnetoCorp发行的票据。
+
 ## Commercial paper lifecycle
+## 商业票据生命周期
 
 A paper 00001 is issued by MagnetoCorp on May 31. Spend a few moments looking at
 the first **state** of this paper, with its different properties and values:
+票据00001由MagnetoCorp在五月31号发行。先花点时间看看这种票据的状态，有不同的属性和值：
 
 ```
 Issuer = MagnetoCorp
@@ -33,8 +39,14 @@ uniquely identified as `MagnetoCorp00001` -- a composition of the `Issuer` and
 `Paper` properties. Finally, see how the property `Current state = issued`
 quickly identifies the stage of MagnetoCorp paper 00001 in its lifecycle.
 
+这张票据的状态是**发行**交易的结果，它诞生了MagnetoCorp的第一张商业票据。注意，该票据是拥有5MUSD的6个月之后的兑换面值。 看到 `Issuer` 和 `Owner` 在票据00001发行的时候是相同的。注意该票据可以用`MagnetoCorp00001`唯一标识，
+
 Shortly after issuance, the paper is bought by DigiBank. Spend a few moments
 looking at how the same commercial paper has changed as a result of this **buy**
+transaction:
+
+发行
+
 transaction:
 
 ```
